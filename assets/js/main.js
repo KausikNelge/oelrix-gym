@@ -140,6 +140,53 @@ function handleForms() {
   }
 }
 
+function handleBmiPlanner() {
+  var bmiForm = document.getElementById("bmiForm");
+  var bmiScore = document.getElementById("bmiScore");
+  var bmiCategory = document.getElementById("bmiCategory");
+  var bmiTip = document.getElementById("bmiTip");
+  if (!bmiForm || !bmiScore || !bmiCategory || !bmiTip) return;
+
+  bmiForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    var heightInput = document.getElementById("bmiHeight");
+    var weightInput = document.getElementById("bmiWeight");
+    if (!heightInput || !weightInput) return;
+
+    var heightCm = Number(heightInput.value);
+    var weightKg = Number(weightInput.value);
+
+    if (!heightCm || !weightKg || heightCm < 120 || weightKg < 30) {
+      bmiScore.textContent = "Please enter valid values";
+      bmiCategory.textContent = "Height should be in cm and weight should be in kg.";
+      bmiTip.textContent = "Tip: Try numbers close to your current measurements.";
+      return;
+    }
+
+    var heightM = heightCm / 100;
+    var bmi = weightKg / (heightM * heightM);
+    var bmiRounded = bmi.toFixed(1);
+    var focus = "Build consistency with 3 guided sessions per week.";
+    var category = "Normal range";
+
+    if (bmi < 18.5) {
+      category = "Underweight range";
+      focus = "Focus on strength progression and nutrition support for healthy weight gain.";
+    } else if (bmi >= 25 && bmi < 30) {
+      category = "Overweight range";
+      focus = "Start with strength + conditioning sessions and a realistic calorie plan.";
+    } else if (bmi >= 30) {
+      category = "Obesity range";
+      focus = "Begin with low-impact conditioning and coached strength for safe progress.";
+    }
+
+    bmiScore.textContent = "BMI " + bmiRounded;
+    bmiCategory.textContent = category + " • " + focus;
+    bmiTip.textContent = "Tip: BMI is only one marker. Our coaches use measurements, strength and energy levels too.";
+  });
+}
+
 function handleReveal() {
   var animatedBlocks = selectAll("[data-animate]");
   if (!animatedBlocks.length) return;
@@ -183,8 +230,8 @@ document.addEventListener("DOMContentLoaded", function () {
   handleTrialPopup();
   handleTestimonials();
   handleForms();
+  handleBmiPlanner();
   handleReveal();
   setCurrentYear();
   scrollToHash();
 });
-
