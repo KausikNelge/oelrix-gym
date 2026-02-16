@@ -560,6 +560,40 @@ body.theme-light .theme-icon--light {
   gap: 20px;
 }
 
+.bmi-grid {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 20px;
+}
+
+.bmi-form {
+  align-self: start;
+}
+
+.bmi-result {
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.bmi-result h3 {
+  margin: 4px 0;
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+}
+
+.bmi-result p {
+  margin: 0;
+}
+
+.bmi-tip {
+  margin-top: 6px !important;
+  font-size: 0.82rem !important;
+  color: var(--text-muted) !important;
+}
+
 .pricing-card {
   padding-top: 22px;
   padding-bottom: 22px;
@@ -1273,7 +1307,8 @@ body.theme-light .chip--cardio {
   }
 
   .card-grid,
-  .pricing-grid {
+  .pricing-grid,
+  .bmi-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1354,7 +1389,8 @@ body.theme-light .chip--cardio {
   }
 
   .card-grid,
-  .pricing-grid {
+  .pricing-grid,
+  .bmi-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 
