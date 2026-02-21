@@ -91,6 +91,23 @@
       </div>
     </section>
 
+    <section class="section section-tight premium-strip" aria-label="Premium amenities">
+      <div class="container premium-strip-grid" data-animate>
+        <article class="premium-item">
+          <p class="premium-kicker">Recovery lounge</p>
+          <h3>Ice bath, percussion therapy and guided cool-down zone</h3>
+        </article>
+        <article class="premium-item">
+          <p class="premium-kicker">Smart tracking</p>
+          <h3>Monthly InBody scan + performance dashboard for every member</h3>
+        </article>
+        <article class="premium-item">
+          <p class="premium-kicker">Hospitality</p>
+          <h3>Valet parking, towel service and premium locker rooms</h3>
+        </article>
+      </div>
+    </section>
+
     <!-- TRAINING PHILOSOPHY -->
     <section class="section section-tight" id="featured-classes">
       <div class="container section-header" data-animate>
@@ -348,14 +365,39 @@
       </div>
       <div class="container bmi-grid" data-animate>
         <form class="card bmi-form" id="bmiForm">
-          <div class="form-field">
-            <label for="bmiHeight">Height (cm)</label>
-            <input type="number" id="bmiHeight" min="120" max="230" placeholder="e.g. 172" required>
+          <div class="bmi-unit-toggle" id="bmiUnitToggle" role="tablist" aria-label="BMI unit system">
+            <button type="button" class="bmi-unit is-active" data-unit="metric" role="tab" aria-selected="true">Metric</button>
+            <button type="button" class="bmi-unit" data-unit="imperial" role="tab" aria-selected="false">Imperial</button>
           </div>
-          <div class="form-field">
-            <label for="bmiWeight">Weight (kg)</label>
-            <input type="number" id="bmiWeight" min="30" max="250" placeholder="e.g. 74" required>
+
+          <div class="bmi-panel bmi-panel--metric is-active" data-bmi-panel="metric">
+            <div class="form-field">
+              <label for="bmiHeight">Height (cm)</label>
+              <input type="number" id="bmiHeight" min="120" max="230" placeholder="e.g. 172">
+            </div>
+            <div class="form-field">
+              <label for="bmiWeight">Weight (kg)</label>
+              <input type="number" id="bmiWeight" min="30" max="250" placeholder="e.g. 74">
+            </div>
           </div>
+
+          <div class="bmi-panel" data-bmi-panel="imperial" hidden>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="bmiFeet">Height (ft)</label>
+                <input type="number" id="bmiFeet" min="3" max="8" placeholder="e.g. 5">
+              </div>
+              <div class="form-field">
+                <label for="bmiInches">Height (in)</label>
+                <input type="number" id="bmiInches" min="0" max="11" placeholder="e.g. 8">
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="bmiWeightLb">Weight (lb)</label>
+              <input type="number" id="bmiWeightLb" min="66" max="550" placeholder="e.g. 163">
+            </div>
+          </div>
+
           <button type="submit" class="btn btn-primary btn-full">Calculate my range</button>
         </form>
         <article class="card bmi-result" id="bmiResultCard" aria-live="polite">
@@ -363,49 +405,57 @@
           <h3 id="bmiScore">Enter your numbers</h3>
           <p id="bmiCategory">We'll show your BMI range and a training focus.</p>
           <p class="bmi-tip" id="bmiTip">Tip: This is a general estimate, not a medical diagnosis.</p>
+          <p class="bmi-tip" id="bmiRange"></p>
         </article>
       </div>
     </section>
 
     <section class="section section-alt" id="membership">
       <div class="container section-header" data-animate>
-        <h2>Memberships that stay realistic</h2>
-        <p>Simple monthly plans for people who train regularly.</p>
+        <h2>Memberships that feel premium and transparent</h2>
+        <p>Switch between monthly and annual billing instantly. Annual saves 18%.</p>
+      </div>
+      <div class="container pricing-toolbar" data-animate>
+        <div class="billing-toggle" id="billingToggle" role="tablist" aria-label="Billing cycle">
+          <button type="button" class="billing-option is-active" data-billing="monthly" role="tab" aria-selected="true">Monthly</button>
+          <button type="button" class="billing-option" data-billing="annual" role="tab" aria-selected="false">Annual</button>
+        </div>
+        <p class="billing-note">Annual members get complimentary onboarding and 2 PT sessions.</p>
       </div>
       <div class="container pricing-grid" data-animate>
-        <article class="card pricing-card">
+        <article class="card pricing-card" data-plan="basic" data-monthly="999" data-annual="819">
           <h3>Basic</h3>
-          <p class="price">₹999<span>/month</span></p>
+          <p class="price">₹<span class="price-value">999</span><span class="price-period">/month</span></p>
           <ul class="checklist">
             <li>Gym access on weekdays</li>
             <li>Access to cardio &amp; strength floor</li>
             <li>Locker &amp; shower access</li>
-            <li>Form checks from floor trainers</li>
+            <li>Monthly movement screening</li>
           </ul>
           <button class="btn btn-outline" data-open-trial>Talk about this plan</button>
         </article>
-        <article class="card pricing-card pricing-card--highlight">
-          <div class="pill">Recommended</div>
+        <article class="card pricing-card pricing-card--highlight" data-plan="standard" data-monthly="1799" data-annual="1475">
+          <div class="pill">Most chosen</div>
           <h3>Standard</h3>
-          <p class="price">₹1,799<span>/month</span></p>
+          <p class="price">₹<span class="price-value">1,799</span><span class="price-period">/month</span></p>
           <ul class="checklist">
             <li>All Basic benefits</li>
             <li>Unlimited group classes</li>
             <li>Personalised workout plan</li>
-            <li>Monthly progress check-in</li>
+            <li>Monthly progress check-in + scan</li>
           </ul>
           <button class="btn btn-primary" data-open-trial>Enquire about Standard</button>
         </article>
-        <article class="card pricing-card">
-          <h3>Premium</h3>
-          <p class="price">₹2,999<span>/month</span></p>
+        <article class="card pricing-card" data-plan="elite" data-monthly="2999" data-annual="2459">
+          <h3>Elite</h3>
+          <p class="price">₹<span class="price-value">2,999</span><span class="price-period">/month</span></p>
           <ul class="checklist">
             <li>All Standard benefits</li>
-            <li>1:1 personal training sessions</li>
+            <li>2 x 1:1 PT sessions every month</li>
             <li>Nutrition guidance with Kavya</li>
             <li>Priority support &amp; booking</li>
           </ul>
-          <button class="btn btn-outline" data-open-trial>Enquire about Premium</button>
+          <button class="btn btn-outline" data-open-trial>Enquire about Elite</button>
         </article>
       </div>
     </section>
