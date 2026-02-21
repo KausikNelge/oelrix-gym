@@ -218,6 +218,63 @@ function handleReveal() {
   }
 }
 
+function handleScrollProgress() {
+  var progressBar = document.getElementById("scrollProgressBar");
+  if (!progressBar) return;
+
+  function updateProgress() {
+    var scrollTop = window.scrollY || document.documentElement.scrollTop;
+    var pageHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var progress = pageHeight > 0 ? (scrollTop / pageHeight) * 100 : 0;
+    progressBar.style.width = Math.min(Math.max(progress, 0), 100) + "%";
+  }
+
+  window.addEventListener("scroll", updateProgress, { passive: true });
+  window.addEventListener("resize", updateProgress);
+  updateProgress();
+}
+
+function handleBillingToggle() {
+  var toggle = document.getElementById("billingToggle");
+  var billingNote = document.getElementById("billingNote");
+  if (!toggle) return;
+
+  var options = selectAll(".billing-option", toggle);
+  var prices = selectAll(".price[data-price-monthly][data-price-quarterly]");
+
+  function render(mode) {
+    options.forEach(function (option) {
+      var isActive = option.getAttribute("data-billing") === mode;
+      option.classList.toggle("is-active", isActive);
+      option.setAttribute("aria-selected", isActive ? "true" : "false");
+    });
+
+    prices.forEach(function (el) {
+      var monthly = el.getAttribute("data-price-monthly");
+      var quarterly = el.getAttribute("data-price-quarterly");
+      var nextPrice = mode === "quarterly" ? quarterly : monthly;
+      var suffix = mode === "quarterly" ? "/month, billed quarterly" : "/month";
+      el.innerHTML = "₹" + Number(nextPrice).toLocaleString("en-IN") + "<span>" + suffix + "</span>";
+    });
+
+    if (billingNote) {
+      billingNote.textContent =
+        mode === "quarterly"
+          ? "Quarterly plans are charged every 3 months and include a 12% commitment discount."
+          : "Quarterly plans are charged once every 3 months and include priority onboarding.";
+    }
+  }
+
+  options.forEach(function (option) {
+    option.addEventListener("click", function () {
+      var mode = option.getAttribute("data-billing") || "monthly";
+      render(mode);
+    });
+  });
+
+  render("monthly");
+}
+
 function setCurrentYear() {
   var yearTarget = document.getElementById("currentYear");
   if (!yearTarget) return;
@@ -232,6 +289,8 @@ document.addEventListener("DOMContentLoaded", function () {
   handleForms();
   handleBmiPlanner();
   handleReveal();
+  handleScrollProgress();
+  handleBillingToggle();
   setCurrentYear();
   scrollToHash();
 });
