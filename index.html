@@ -11,6 +11,9 @@
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="theme-dark">
+  <div class="scroll-progress" aria-hidden="true">
+    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+  </div>
   <header class="site-header">
     <div class="container nav-container">
       <a href="#home" class="logo">
@@ -370,12 +373,19 @@
     <section class="section section-alt" id="membership">
       <div class="container section-header" data-animate>
         <h2>Memberships that stay realistic</h2>
-        <p>Simple monthly plans for people who train regularly.</p>
+        <p>Simple plans for people who train regularly, with a built-in commitment discount.</p>
+      </div>
+      <div class="container billing-toggle-wrap" data-animate>
+        <p class="billing-label">Billing preference</p>
+        <div class="billing-toggle" id="billingToggle" role="tablist" aria-label="Choose billing cycle">
+          <button class="billing-option is-active" role="tab" aria-selected="true" data-billing="monthly">Monthly</button>
+          <button class="billing-option" role="tab" aria-selected="false" data-billing="quarterly">Quarterly <span>Save 12%</span></button>
+        </div>
       </div>
       <div class="container pricing-grid" data-animate>
         <article class="card pricing-card">
           <h3>Basic</h3>
-          <p class="price">₹999<span>/month</span></p>
+          <p class="price" data-price-monthly="999" data-price-quarterly="879">₹999<span>/month</span></p>
           <ul class="checklist">
             <li>Gym access on weekdays</li>
             <li>Access to cardio &amp; strength floor</li>
@@ -387,7 +397,7 @@
         <article class="card pricing-card pricing-card--highlight">
           <div class="pill">Recommended</div>
           <h3>Standard</h3>
-          <p class="price">₹1,799<span>/month</span></p>
+          <p class="price" data-price-monthly="1799" data-price-quarterly="1589">₹1,799<span>/month</span></p>
           <ul class="checklist">
             <li>All Basic benefits</li>
             <li>Unlimited group classes</li>
@@ -398,7 +408,7 @@
         </article>
         <article class="card pricing-card">
           <h3>Premium</h3>
-          <p class="price">₹2,999<span>/month</span></p>
+          <p class="price" data-price-monthly="2999" data-price-quarterly="2649">₹2,999<span>/month</span></p>
           <ul class="checklist">
             <li>All Standard benefits</li>
             <li>1:1 personal training sessions</li>
@@ -407,6 +417,9 @@
           </ul>
           <button class="btn btn-outline" data-open-trial>Enquire about Premium</button>
         </article>
+      </div>
+      <div class="container" data-animate>
+        <p class="billing-note" id="billingNote">Quarterly plans are charged once every 3 months and include priority onboarding.</p>
       </div>
     </section>
 

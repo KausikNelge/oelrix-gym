@@ -43,6 +43,21 @@ body {
   padding: 0;
 }
 
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 3px;
+  z-index: 80;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #ff6a00, #ff9f43);
+  transition: width 120ms linear;
+}
+
 body {
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: var(--bg-main);
@@ -558,6 +573,63 @@ body.theme-light .theme-icon--light {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
+}
+
+.billing-toggle-wrap {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.billing-label {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.billing-toggle {
+  display: inline-flex;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  padding: 4px;
+  background: rgba(255, 255, 255, 0.02);
+  gap: 4px;
+}
+
+.billing-option {
+  border: none;
+  background: transparent;
+  color: var(--text-soft);
+  font-size: 0.82rem;
+  border-radius: 999px;
+  padding: 8px 14px;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.billing-option span {
+  font-size: 0.7rem;
+  color: var(--accent);
+}
+
+.billing-option.is-active {
+  background: rgba(255, 122, 26, 0.16);
+  color: var(--text-main);
+}
+
+.billing-note {
+  margin: 18px auto 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  max-width: 700px;
 }
 
 .bmi-grid {
